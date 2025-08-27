@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+{% block title %}All Entries{% endblock %}
+
+{% block content %}
+
+<!-- Inject CSS Variables -->
+<style>
+  :root {
+    --soft-yellow: {{ colors['soft_yellow'] | default('#FFF8DC') }};
+    --forest-green: {{ colors['forest_green'] | default('#228B22') }};
+    --deep-teal: {{ colors['deep_teal'] | default('#008080') }};
+    --sunset-orange: {{ colors['sunset_orange'] | default('#FF4500') }};
+    --sky-blue: {{ colors['sky_blue'] | default('#87CEEB') }};
+    --warm-pink: {{ colors['warm_pink'] | default('#FF69B4') }};
+  }
+</style>
+
+<!-- Dark Mode Toggle
+<div class="text-end mb-3">
+  <button class="btn btn-sm btn-outline-dark" onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
+</div> -->
+
+<!-- Welcome Banner -->
+<div class="p-4 mb-4 rounded shadow-sm border" style="background-color: var(--soft-yellow); color: var(--forest-green);">
+  <h1 class="display-6">Welcome back, {{ username or 'Guest' }}!</h1>
+  <p class="lead" style="color: var(--deep-teal); color: #9d7f59;">
+    Your journal is your canvas—where thoughts become stories and ideas take shape.
+  </p>
+  <blockquote class="blockquote mt-3">
+    <p class="mb-0" style="color: #6a714b;">“History is not a burden on the memory but an illumination of the soul.”</p>
+    <footer class="blockquote-footer">Lord Acton</footer>
+  </blockquote>
+</div>
+
+<div class="row">
+
+  <!-- Sidebar: Quick Actions -->
+  <div class="col-md-3">
+    <div class="card shadow-sm mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Quick Actions</h5>
+        <a href="{{ url_for('add_entry') }}" class="btn w-100 mb-2" >New Entry</a>
+        <style>
+          .btn{
+            background-color: #919c67;
+            color: #f9e0ae;
+            border-radius: 5px;
+            border-color: #919c67;
+            transition: all 0.3s ease;
+          }
+          .btn:hover {
+            background-color: #7b8655;  /* slightly darker shade */
+            color: #fff;                /* make text stand out */
+            transform: scale(1.05);     /* subtle zoom on hover */
+          }
+        </style>
+
+        <a href="{{ url_for('export_entries') }}" class="btn w-100" >Export CSV</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content: Entries List -->
+  <div class="col-md-9">
+    <h2 class="mb-4">All Journal Entries</h2>
+
+    {% for entry in entries %}
+      <div class="card mb-3 shadow-sm border-0" style="background-color: var(--soft-yellow); color: #919c67; color: #9d7f59; border-radius: 5px; border-radius: 10px;">
+        <div class="card-body">
+          <h4 class="card-title" style="color: #919c67; border-radius: 5px;">{{ entry.title }}</h4>
+          <p class="card-text text-muted">{{ entry.content[:200] }}{% if entry.content|length > 200 %}...{% endif %}</p>
+
+          {% if entry.tags %}
+            <div class="mb-2">
+              {% for tag in entry.tags.split(',') %}
+                <span class="badge" style="background-color: #919c67; color: #f9e0ae; border-radius: 5px;">{{ tag.strip() }}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
+
+          <small class="text-muted">
+            Created: {{ entry.created_at.strftime("%Y-%m-%d %H:%M") }}
+            {% if entry.updated_at %}<br>Updated: {{ entry.updated_at.strftime("%Y-%m-%d %H:%M") }}{% endif %}
+          </small>
+
+          <div class="mt-3">
+            <a href="{{ url_for('view_entry', entry_id=entry.id) }}" class="btn btn-sm me-1" >View</a>
+            <style>
+              .btn {
+                background-color: #919c67;
+                color: #f9e0ae;
+                border-radius: 5px;
+                border-color: #919c67;
+                transition: all 0.3s ease;
+              }
+              .btn:hover {
+                background-color: #7b8655;  /* slightly darker shade */
+                color: #fff;                /* make text stand out */
+                transform: scale(1.05);     /* subtle zoom on hover */
+              }
+            </style>
+            <a href="{{ url_for('edit_entry', entry_id=entry.id) }}" class="btn btn-sm me-1" >Edit</a>
+            <style>
+              .btn {
+                background-color: #919c67;
+                color: #f9e0ae;
+                border-radius: 5px;
+                border-color: #919c67;
+                transition: all 0.3s ease;
+              }
+              .btn:hover {
+                background-color: #7b8655;  /* slightly darker shade */
+                color: #fff;                /* make text stand out */
+                transform: scale(1.05);     /* subtle zoom on hover */
+              }
+            </style>
+            <form action="{{ url_for('delete_entry', entry_id=entry.id) }}" method="POST" style="display: inline;">
+              <button type="submit" class="btn btn-sm" style="background-color: #919c67; color: #f9e0ae; border-radius: 5px;" onclick="return confirm('Delete this entry?');">Delete</button>
+              <style>
+              .btn.btn-sm {
+                background-color: #919c67;
+                color: #f9e0ae;
+                border-radius: 5px;
+                border-color: #919c67;
+                transition: all 0.3s ease;
+              }
+              .btn.btn-sm:hover {
+                background-color: #7b8655;  /* slightly darker shade */
+                color: #fff;                /* make text stand out */
+                transform: scale(1.05);     /* subtle zoom on hover */
+              }
+            </style>
+            </form>
+          </div>
+        </div>
+      </div>
+    {% else %}
+      <p class="text-muted" style="color: #f9e0ae;">No entries yet. Start by adding one!</p>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- Dark Mode Script with Persistence -->
+<!-- <script>
+function toggleDarkMode() {
+  document.body.classList.toggle('dark-mode');
+  localStorage.setItem('darkMode', document.body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
+}
+
+window.onload = function() {
+  if (localStorage.getItem('darkMode') === 'enabled') {
+    document.body.classList.add('dark-mode');
+  }
+};
+</script>
+
+<style>
+.dark-mode {
+  background-color: #2E2E2E;
+  color: #F5EEDC;
+}
+.dark-mode .card {
+  background-color: #4E8098 !important;
+  color: #F5EEDC !important;
+}
+.dark-mode .btn {
+  color: white !important;
+}
+</style> -->
+
+{% endblock %}

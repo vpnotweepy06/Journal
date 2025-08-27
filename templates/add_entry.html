@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container d-flex justify-content-center">
+  <div class="card p-4" style="background-color: #b18b5e; border-radius: 10px; max-width: 600px; width: 100%;">
+    <h2 class="text-center mb-4">Add New Entry</h2>
+
+    <form method="POST">
+      {{ form.hidden_tag() }}
+
+      <div class="mb-3">
+        {{ form.title.label(class="form-label") }}
+        {{ form.title(class="form-control") }}
+      </div>
+
+      <div class="mb-3">
+        {{ form.content.label(class="form-label") }}
+        {{ form.content(class="form-control", rows=5) }}
+      </div>
+
+      <div class="mb-3">
+        {{ form.tags.label(class="form-label") }}
+        {{ form.tags(class="form-control") }}
+      </div>
+
+      <div class="text-center">
+        {{ form.submit(class="btn btn-success") }}
+        <style>
+            .btn {
+                background-color: #919c67;
+                color: #f9e0ae;
+                border-radius: 5px;
+                border-color: #919c67;
+                transition: all 0.3s ease;
+            }
+            .btn:hover {
+                background-color: #7b8655;  /* slightly darker shade */
+                color: #fff;                /* make text stand out */
+                transform: scale(1.05);     /* subtle zoom on hover */
+            }
+        </style>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

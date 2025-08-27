@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm border-0">
+  <div class="card-body">
+    <h3 class="card-title mb-3">Profile Overview</h3>
+    <p style="color: #919c67; border-radius: 5px;"><strong>Username:</strong> {{ user.username }}</p>
+    <p style="color: #919c67; border-radius: 5px;"><strong>Entries Written:</strong> {{ entry_count }}</p>
+
+    <hr>
+    <h5 class="mt-4">Account Actions</h5>
+    <a href="#" class="btn btn-outline-secondary disabled" style="color: #919c67; border-radius: 5px;">Change Password (coming soon)</a>
+  </div>
+</div>
+{% endblock %}

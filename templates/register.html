@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card shadow-sm border-0">
+      <div class="card-body">
+        <h3 class="card-title mb-4 text-center">Create Your Journal Account</h3>
+        <form method="POST">
+          {{ form.hidden_tag() }}
+          <div class="mb-3" style="color: #9d7f59; border-radius: 5px;"">
+            {{ form.username.label(class="form-label") }}
+            {{ form.username(class="form-control") }}
+          </div>
+          <div class="mb-3" style="color: #9d7f59; border-radius: 5px;">
+            {{ form.password.label(class="form-label") }}
+            {{ form.password(class="form-control") }}
+          </div>
+          <button type="submit" class="btn btn-success w-100" style="background-color: #919c67; color: #f9e0ae; border-radius: 5px;">{{ form.submit.label.text }}</button>
+        </form>
+        <p class="mt-3 text-center text-muted" style="color: #9d7f59; border-radius: 5px;">
+          Already registered? <a href="{{ url_for('login') }}">Log in here</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block title %}{{ entry.title }}{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm border-0">
+  <div class="card-body">
+    <h2 class="card-title mb-3" style="color: #919c67;">{{ entry.title }}</h2>
+
+    <!-- Tags -->
+    {% if entry.tags %}
+      <div class="mb-3">
+        {% for tag in entry.tags.split(',') %}
+          <span class="badge bg-secondary me-1" style="background-color: #919c67; color: #f9e0ae; border-radius: 5px;">{{ tag.strip() }}</span>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <!-- Content -->
+    <p class="card-text fs-5 text-muted" style="color: #9d7f59;">{{ entry.content }}</p>
+
+    <!-- Timestamps -->
+    <hr>
+    <small class="text-muted" style="color: #9d7f59;">
+      Created: {{ entry.created_at.strftime("%Y-%m-%d %H:%M") }}<br>
+      {% if entry.updated_at %}
+        Updated: {{ entry.updated_at.strftime("%Y-%m-%d %H:%M") }}
+      {% endif %}
+    </small>
+
+    <!-- Actions -->
+    <div class="mt-4">
+      <a href="{{ url_for('edit_entry', entry_id=entry.id) }}" 
+   class="btn btn-outline-success me-2 edit-btn">
+   Edit
+</a>
+
+<style>
+  .edit-btn {
+    background-color: #919c67;
+    color: #f9e0ae;
+    border-radius: 5px;
+    border-color: #919c67;
+    transition: all 0.3s ease; /* smooth hover effect */
+  }
+
+  .edit-btn:hover {
+    background-color: #7b8655;  /* slightly darker shade */
+    color: #fff;                /* make text stand out */
+    transform: scale(1.05);     /* subtle zoom on hover */
+  }
+</style>
+
+
+      <form action="{{ url_for('delete_entry', entry_id=entry.id) }}" method="POST" style="display:inline;">
+        <button type="submit" class="btn btn-outline-danger custom-delete-btn" onclick="return confirm('Delete this entry?');">Delete</button>
+        <style>
+          .custom-delete-btn{
+            background-color: #919c67;
+    color: #f9e0ae;
+    border-radius: 5px;
+    border-color: #919c67;
+    transition: all 0.3s ease; /* smooth hover effect */  
+          }
+          .custom-delete-btn:hover {
+            
+            background-color: #7b8655;  /* slightly darker shade */
+            color: #fff;                /* make text stand out */
+            transform: scale(1.05); 
+          }
+        </style>
+      </form>
+
+
+      <a href="{{ url_for('index') }}" class="btn btn-outline-secondary ms-2">← Back to Entries</a>
+
+        <style>
+          .btn.btn-outline-secondary.ms-2{
+            background-color: #919c67;
+    color: #f9e0ae;
+    border-radius: 5px;
+    border-color: #919c67;
+    transition: all 0.3s ease;
+             
+          }
+          .btn.btn-outline-secondary.ms-2:hover {
+            background-color: #7b8655;  /* slightly darker shade */
+            color: #fff;                /* make text stand out */
+            transform: scale(1.05); 
+  }
+</style>
+
+    </div>
+  </div>
+</div>
+{% endblock %}
