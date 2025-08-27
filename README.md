@@ -2,14 +2,14 @@ Willow is a simple Journal Web Application built using Flask as a practice proje
 
 Some potential enhancements that could be added in the future include:
 
-2.Dark Mode / Theme Customization for a more personalized experience.
+1.Dark Mode / Theme Customization for a more personalized experience.
 
-3.Search & Filter functionality to quickly find past entries by keywords or tags.
+2.Search & Filter functionality to quickly find past entries by keywords or tags.
 
-4.Mobile Responsiveness for better usability on smartphones and tablets.
+3.Mobile Responsiveness for better usability on smartphones and tablets.
 
-5.Reminders & Notifications to encourage consistent journaling.
+4.Reminders & Notifications to encourage consistent journaling.
 
-6.Export / Backup Options (PDF, CSV, or cloud sync).
+5.Export / Backup Options (PDF, CSV, or cloud sync).
 
-7.User Profiles & Settings for a more personalized journaling space.
+6.User Profiles & Settings for a more personalized journaling space.
