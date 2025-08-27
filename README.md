@@ -1,5 +1,16 @@
-Journal App is a lightweight personal journaling application built with Flask, SQLAlchemy, and Bootstrap. It allows users to register, log in, and manage their journal entries with ease. Each entry can have a title, detailed content, and optional tags for better organization. Once logged in, users can add new entries, edit existing ones, or delete them if no longer needed. All data is stored in a secure SQLite database, making the app simple yet powerful enough for everyday journaling.
+Willow is a simple Journal Web Application built using Flask as a practice project to learn the fundamentals of web development with Python. The app allows users to register, log in, create, edit, and delete journal entries with support for tagging and filtering. It uses Flask-SQLAlchemy for database management, WTForms for form handling, and Bootstrap for styling. To make the project more professional and organized, the repository also includes a requirements.txt file for dependency management, a .gitignore file to keep unnecessary files out of version control, and a well-structured README with setup instructions, usage details, and future improvements. The commit history follows clear and descriptive messages (e.g., “Add entry model”, “Fix navbar alignment”), making the development process easy to follow. Even though this was created as a practice project, the structure is designed to resemble a real-world Flask project, making it useful as a portfolio showcase while learning Git, Flask, and deployment basics.
 
-To get started, clone the repository and make sure you have Python installed. Create a virtual environment, install the required dependencies with pip install -r requirements.txt, and then run the application using python app.py. By default, the app will be available locally at http://127.0.0.1:5000/. If you want to open it on your phone while connected to the same WiFi, you can run it with python app.py --host=0.0.0.0 and then visit http://<your-computer-ip>:5000/ on your mobile browser.
+Future Features
+1.Some potential enhancements that could be added in the future include:
 
-This project is designed to be a personal productivity tool, but it can also serve as a great starting point for learning Flask. You can extend it by adding features like password resets, profile customization, search and filtering of entries, exporting journal data to PDF, or even packaging it into an Android APK with frameworks like BeeWare or Kivy. With its clean interface and simple structure, Journal App provides both practicality and flexibility for personal use or future development.
+2.Dark Mode / Theme Customization for a more personalized experience.
+
+3.Search & Filter functionality to quickly find past entries by keywords or tags.
+
+4.Mobile Responsiveness for better usability on smartphones and tablets.
+
+5.Reminders & Notifications to encourage consistent journaling.
+
+6.Export / Backup Options (PDF, CSV, or cloud sync).
+
+7.User Profiles & Settings for a more personalized journaling space.
